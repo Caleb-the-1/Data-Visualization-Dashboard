@@ -4,10 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import utils.Style;
 
-/**
- * TopProductsPanel - Creates the ranking list showing top 3 products
- * This is the BOTTOM-RIGHT panel in the dashboard
- */
+
 public class TopProductsPanel {
     
     /**

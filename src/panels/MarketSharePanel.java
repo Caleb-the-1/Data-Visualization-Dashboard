@@ -8,34 +8,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import utils.DataManager;
 import utils.Style;
 
-/**
- * MarketSharePanel - Creates the pie chart showing market share
- * This is the TOP-RIGHT panel in the dashboard
- */
 public class MarketSharePanel {
     
-    /**
-     * Create the market share panel with pie chart
-     */
+    private static PieChart pieChart;
+    
     public static VBox create() {
         VBox panel = Style.createStyledPanel("Market Share");
         
-        // Create the pie chart
-        PieChart pieChart = new PieChart();
+        pieChart = new PieChart();
         pieChart.setLegendVisible(false);
         pieChart.setPrefHeight(250);
         
-        // Add data slices (like cutting a pizza!)
-        pieChart.getData().addAll(
-            new PieChart.Data("Product A", 40),
-            new PieChart.Data("Product B", 20),
-            new PieChart.Data("Product C", 15),
-            new PieChart.Data("Product D", 25)
-        );
+        // Load initial data
+        refreshData();
         
-        // Create legend (the colored boxes with labels)
+        // Listen for data changes
+        DataManager.addListener(() -> refreshData());
+        
         VBox legend = new VBox(10);
         legend.setAlignment(Pos.CENTER_LEFT);
         legend.setPadding(new Insets(20));
@@ -46,7 +38,6 @@ public class MarketSharePanel {
             Style.createLegendItem("Product D", "#e15759")
         );
         
-        // Winner badge (trophy + text)
         HBox winner = new HBox(10);
         winner.setAlignment(Pos.CENTER);
         winner.setPadding(new Insets(15, 0, 0, 0));
@@ -56,11 +47,17 @@ public class MarketSharePanel {
         winnerText.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         winner.getChildren().addAll(trophy, winnerText);
         
-        // Arrange chart and legend side-by-side
         HBox chartAndLegend = new HBox(20);
         chartAndLegend.getChildren().addAll(pieChart, legend);
         
         panel.getChildren().addAll(chartAndLegend, winner);
         return panel;
+    }
+    
+    private static void refreshData() {
+        pieChart.getData().clear();
+        for (DataManager.DataEntry entry : DataManager.getMarketShareData()) {
+            pieChart.getData().add(new PieChart.Data(entry.label, entry.value));
+        }
     }
 }
