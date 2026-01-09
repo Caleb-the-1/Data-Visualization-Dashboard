@@ -37,7 +37,7 @@ cd src
 
 ### Compile:
 ```bash
-javac --module-path "YOUR_JAVAFX_PATH\lib" --add-modules javafx.controls,javafx.fxml DashboardApp.java components/*.java panels/*.java utils/*.java
+javac --module-path "C:\Users\USER\Desktop\javafx-sdk-25.0.1\lib" --add-modules javafx.controls,javafx.fxml DashboardApp.java components/*.java panels/*.java utils/*.java
 ```
 
 **Replace `YOUR_JAVAFX_PATH` with your actual JavaFX SDK path.**
@@ -49,8 +49,7 @@ javac --module-path "C:\javafx-sdk-25.0.1\lib" --add-modules javafx.controls,jav
 
 ### Run:
 ```bash
-java --module-path "YOUR_JAVAFX_PATH\lib" --add-modules javafx.controls,javafx.fxml DashboardApp
-```
+java --module-path "C:\Users\USER\Desktop\javafx-sdk-25.0.1\lib" --add-modules javafx.controls,javafx.fxml DashboardApp
 
 **Replace `YOUR_JAVAFX_PATH` with your actual JavaFX SDK path.**
 
